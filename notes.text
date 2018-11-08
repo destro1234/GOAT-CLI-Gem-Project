@@ -1,0 +1,8 @@
+Command Line Project Plan - Compares best nba players for each position to create a greatst of all time starting 5.
+
+-Ask user to input position they would like to look up
+-Display best players of all time at position Guard, Forward of Center.
+-Ask user to select two players from list to compare
+-Ask user to select player to team or compare two different players.
+-Do the same for 5 starting positions.
+-Return all star team.
