@@ -2,6 +2,8 @@ class GOATCLI::CLI
 
 
   def call
+    starting_5 = {:point_guard=> "", :shooting_guard=> "", :small_forward=> "", :power_forward=> "", :center=> ""}
+
 
     positions
 
@@ -11,19 +13,15 @@ class GOATCLI::CLI
 
     puts "Which player would you add to your starting 5? Or do you want to keep on comparing?"
 
-    @starting_5
-
-    #if point_guard
-      #list_pointguards
-    #elsif shooting_guard
-      #list_shooting_guards
-    #elsif small_forward
-      #list_small_forwards
-    #elsif power_forward
-      #list power_forwards
-    #elsif center
-      #list centers
-    #end
+    puts <<-DOC
+      starting_5 = {
+        :point_guard => Magic Johnson,
+        :shooting_guard => Michael Jordan,
+        :small_forward => Lebron James,
+        :power_forward => Tim Duncan,
+        :center => Shaq
+      }
+    DOC
   end
 
   def positions
@@ -48,7 +46,6 @@ class GOATCLI::CLI
   end
 
   def add_to_team
-    starting_5 = {:point_guard=> "", :shooting_guard=> "", :small_forward=> "", :power_forward=> "", :center=> ""}
     starting_5
   end
 
