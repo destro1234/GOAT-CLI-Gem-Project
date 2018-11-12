@@ -1,18 +1,16 @@
 class GOATCLI::CLI
 
-  @starting_5 = {:point_guard=> "", :shooting_guard=> "", :small_forward=> "", :power_forward=> "", :center=> ""}
-
 
   def call
-    
+
     positions
-    
-    
+
+
 
     compare
 
     puts "Which player would you add to your starting 5? Or do you want to keep on comparing?"
-    
+
     @starting_5
 
     #if point_guard
