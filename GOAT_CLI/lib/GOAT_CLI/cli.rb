@@ -25,13 +25,19 @@ class GOATCLI::CLI
   end
 
   def positions
-    puts <<-DOC
-      1.list point guards
-      2.list shooting guards
-      3.list small forwards
-      4.list power forwards
-      5.list centers
-    DOC
+    input = gets.strip
+    case input
+    when "Point Guard"
+      puts "1.list point guards"
+    when "Shooting Guard"
+      puts "2.list shooting guards"
+    when "Small Forward"
+      puts "3.list small forwards"
+    when "Power Forward"
+      puts "4.list power forwards"
+    when "Center"
+      puts "5.list centers"
+    end
   end
 
   def compare
