@@ -1,5 +1,2 @@
-require "GOAT_CLI/version"
-
-module GOATCLI
-  # Your code goes here...
-end
+require_relative "./GOAT_CLI/version"
+require_relative "./GOAT_CLI/cli"

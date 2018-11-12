@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require './lib/GOAT_CLI'
+
+GOATCLI::CLI.new.call
