@@ -1,9 +1,20 @@
 class GOATCLI::CLI
 
+  @starting_5 = {:point_guard=> "", :shooting_guard=> "", :small_forward=> "", :power_forward=> "", :center=> ""}
+
+
   def call
-    puts "The Dream Team was the greatest team of NBA superstars ever formed. Here you can compare players and create your own Dream Team starting 5."
+    
     positions
-    puts "Enter which two players would you like to compare?"
+    
+    
+
+    compare
+
+    puts "Which player would you add to your starting 5? Or do you want to keep on comparing?"
+    
+    @starting_5
+
     #if point_guard
       #list_pointguards
     #elsif shooting_guard
@@ -18,7 +29,6 @@ class GOATCLI::CLI
   end
 
   def positions
-    puts " What position do you want to compare first? Point Guard, Shooting Guard, Small Forward, Power Forward or Center?"
     puts <<-DOC
       1.list point guards
       2.list shooting guards
@@ -29,20 +39,19 @@ class GOATCLI::CLI
   end
 
   def compare
-    puts <<-DOC
+    puts "Enter the first player you would you like to compare?"
+    input = gets.strip
+    puts "Enter the second player you would like to compare?"
+    input2 = gets.strip
+    input = puts <<-DOC
     1.player_1.stats   2.player_2.stats
     DOC
-
+    input
   end
 
-
-
-  def list_pointguards
-    puts <<-DOC
-      1.Magic Johnson
-      2.Chris Paul
-    DOC
-
+  def add_to_team
+    starting_5 = {:point_guard=> "", :shooting_guard=> "", :small_forward=> "", :power_forward=> "", :center=> ""}
+    starting_5
   end
 
   def stats
