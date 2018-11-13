@@ -1,43 +1,19 @@
+require 'pry'
 class GOATCLI::CLI
 
 
+  @@team = []
+
   def call
-    starting_5 = {:point_guard=> "", :shooting_guard=> "", :small_forward=> "", :power_forward=> "", :center=> ""}
-
-
     positions
-
-
-
     compare
-
-    puts "Which player would you add to your starting 5? Or do you want to keep on comparing?"
-
-    puts <<-DOC
-      starting_5 = {
-        :point_guard => Magic Johnson,
-        :shooting_guard => Michael Jordan,
-        :small_forward => Lebron James,
-        :power_forward => Tim Duncan,
-        :center => Shaq
-      }
-    DOC
   end
 
   def positions
+    puts " What position do you want to compare first? Point Guard, Shooting Guard, Small Forward, Power Forward or Center?"
+
     input = gets.strip
-    case input
-    when "Point Guard"
-      puts "1.list point guards"
-    when "Shooting Guard"
-      puts "2.list shooting guards"
-    when "Small Forward"
-      puts "3.list small forwards"
-    when "Power Forward"
-      puts "4.list power forwards"
-    when "Center"
-      puts "5.list centers"
-    end
+    puts "list of #{input}s"
   end
 
   def compare
@@ -45,21 +21,21 @@ class GOATCLI::CLI
     input = gets.strip
     puts "Enter the second player you would like to compare?"
     input2 = gets.strip
-    input = puts <<-DOC
-    1.player_1.stats   2.player_2.stats
-    DOC
-    input
+    puts "#{input}, #{input2}"
+
+    puts "Do you want to continue comparing, or add player?"
+    input = gets.strip
+    if input =="continue comparing"
+      call
+    elsif input == "add player"
+      puts "Which player would you like to add to your team?"
+      player = gets.strip
+      add_to_team(player)
+    end
   end
 
-  def add_to_team
-    starting_5
+  def add_to_team(input)
+    @@team << input
+    puts @@team
   end
-
-  def stats
-    puts "Enter the players you want to compare"
-    puts <<-DOC
-    1. Magic Johnson.stats   2.Chris Paul.stats
-    DOC
-  end
-
 end
