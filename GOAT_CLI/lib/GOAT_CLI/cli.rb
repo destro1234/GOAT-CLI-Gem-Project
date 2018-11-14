@@ -26,6 +26,10 @@ class GOATCLI::CLI
     end
 
 
+    @playerS = GOATCLI::Player.all
+    @team = GOATCLI::DreamTeam
+
+
   end
 
   def positions
