@@ -5,12 +5,31 @@ class GOATCLI::CLI
   @@team = []
 
   def call
+
     positions
     compare
+
+    puts "Do you want to continue comparing, or add player?"
+    input = gets.strip
+
+    if input =="continue comparing"
+      call
+    elsif input == "add player"
+      puts "Which player would you like to add to your team?"
+      player = gets.strip
+      add_to_team(player)
+    end
+
+    until @@team.length == 5
+      call
+
+    end
+
+
   end
 
   def positions
-    puts " What position do you want to compare first? Point Guard, Shooting Guard, Small Forward, Power Forward or Center?"
+    puts " What position do you want to compare? Point Guard, Shooting Guard, Small Forward, Power Forward or Center?"
 
     input = gets.strip
     puts "list of #{input}s"
@@ -22,16 +41,6 @@ class GOATCLI::CLI
     puts "Enter the second player you would like to compare?"
     input2 = gets.strip
     puts "#{input}, #{input2}"
-
-    puts "Do you want to continue comparing, or add player?"
-    input = gets.strip
-    if input =="continue comparing"
-      call
-    elsif input == "add player"
-      puts "Which player would you like to add to your team?"
-      player = gets.strip
-      add_to_team(player)
-    end
   end
 
   def add_to_team(input)
