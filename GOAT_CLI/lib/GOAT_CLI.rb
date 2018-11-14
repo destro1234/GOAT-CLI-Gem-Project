@@ -1,3 +1,5 @@
 require_relative "./GOAT_CLI/version"
 require_relative "./GOAT_CLI/cli"
 require_relative "./GOAT_CLI/scraper"
+require_relative "./GOAT_CLI/player"
+require_relative "./GOAT_CLI/dreamteam"

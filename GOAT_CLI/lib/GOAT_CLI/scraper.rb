@@ -4,10 +4,21 @@ require 'pry'
 
 class GOATCLI::Scraper
 
-  def self.scrape_index_page
-    binding.pry
-    index_page = Nokogiri::HTML(open('http://www.espn.com/nba/story/_/page/nbarankalltime/greatest-players-ever'))
-    index_page
+  def self.scrape_point_guard
+    point_guard_index_page = Nokogiri::HTML(open('http://www.espn.com/nba/story/_/page/nbarankPGs/ranking-top-10-point-guards-ever'))
+    point_guards = point_guard_index_page.css('div .article-body h2').text
+    puts point_guard
+  end
 
+  def self.scrape_shooting_guard
+    shooting_guard_index_page = Nokogiri::HTML(open('http://www.espn.com/nba/story/_/page/nbarankSGs/ranking-top-10-shooting-guards-ever'))
+    shooting_guards = shooting_guard_index_page.css('div .article-body h2').text
+    puts shooting_guards
+  end
+
+  def self.scrape_small_forward
+    small_forward_index_page = Nokogiri::HTML(open('http://www.espn.com/nba/story/_/page/nbarankSFs/ranking-top-10-small-forwards-ever'))
+    small_forwards = small_forward_index_page.css('div .article-body h2').map {|sf| sf.text}
+    puts small_forwards
   end
 end

@@ -1,3 +1,4 @@
+require 'nokogiri'
 require 'pry'
 class GOATCLI::CLI
 
@@ -6,28 +7,27 @@ class GOATCLI::CLI
 
   def call
 
-    positions
-    compare
+    #positions
+    #compare
 
-    puts "Do you want to continue comparing, or add player?"
-    input = gets.strip
+    #puts "Do you want to continue comparing, or add player?"
+    #input = gets.strip
 
-    if input =="continue comparing"
-      call
-    elsif input == "add player"
-      puts "Which player would you like to add to your team?"
-      player = gets.strip
-      add_to_team(player)
-    end
+    #if input =="continue comparing"
+      #call
+    #elsif input == "add player"
+      #puts "Which player would you like to add to your team?"
+      #player = gets.strip
+      #add_to_team(player)
+    #end
 
-    until @@team.length == 5
-      call
+    #until @@team.length == 5
+      #call
 
-    end
-
-
-    @playerS = GOATCLI::Player.all
-    @team = GOATCLI::DreamTeam
+    #end
+    GOATCLI::Scraper.scrape_small_forward
+    #@players = GOATCLI::Player.all
+    #@team = GOATCLI::DreamTeam
 
 
   end
