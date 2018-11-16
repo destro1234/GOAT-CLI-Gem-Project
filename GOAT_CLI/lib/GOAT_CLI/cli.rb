@@ -7,7 +7,7 @@ class GOATCLI::CLI
 
   def call
     positions
-    #compare
+    compare
 
     puts "Do you want to continue comparing, or add player?"
     input = gets.strip
@@ -35,7 +35,8 @@ class GOATCLI::CLI
     input = gets.strip\
 
     if input == "point guard"
-      GOATCLI::Scraper.scrape_point_guard
+      @point_guards = GOATCLI::Scraper.scrape_point_guard
+      @point_guards
     elsif input == "shooting guard"
       GOATCLI::Scraper.scrape_shooting_guard
     elsif input == "small forward"
