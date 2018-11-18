@@ -1,37 +1,25 @@
 require 'open-uri'
 require 'nokogiri'
 require 'pry'
+
 class GOATCLI::Scraper
 
-  def self.scrape_point_guard
-    point_guard_index_page = Nokogiri::HTML(open('https://en.wikipedia.org/wiki/50_Greatest_Players_in_NBA_History'))
-    point_guards = point_guard_index_page.css('.wikitable.sortable')[0].text
-    puts point_guards
-
-  end
-
-  def self.scrape_shooting_guard
-    shooting_guard_index_page = Nokogiri::HTML(open('http://www.espn.com/nba/story/_/page/nbarankSGs/ranking-top-10-shooting-guards-ever'))
-    shooting_guards = shooting_guard_index_page.css('div .article-body h2').select {|c| puts c.text if c.text.include? "."}
-  end
-
-  def self.scrape_small_forward
-    small_forward_index_page = Nokogiri::HTML(open('http://www.espn.com/nba/story/_/page/nbarankSFs/ranking-top-10-small-forwards-ever'))
-    small_forwards = small_forward_index_page.css('div .article-body h2').select {|c| puts c.text if c.text.include? "."}
-
-  end
-
-  def self.scrape_power_forward
-    power_forward_index_page = Nokogiri::HTML(open('http://www.espn.com/nba/story/_/page/nbarankPFs/ranking-greatest-power-forwards-nba-history'))
-    power_forwards = power_forward_index_page.css('div .article-body h2').select {|c| puts c.text if c.text.include? "."}
-
-
-  end
-
-  def self.scrape_center
-    centers_index_page = Nokogiri::HTML(open('http://www.espn.com/nba/story/_/page/nbarankCs/ranking-greatest-centers-nba-history'))
-    centers = centers_index_page.css('div .article-body h2').select {|c| puts c.text if c.text.include? "."}
-
-
+  def self.scrape_players
+    scraped_players = []
+    index_page = Nokogiri::HTML(open('https://en.wikipedia.org/wiki/50_Greatest_Players_in_NBA_History'))
+    table = index_page.css('.wikitable.sortable')[1]
+    players = table.css('tbody tr').each do |player|
+      name = player.css('span.fn').text
+      stats = "#{player.css('td').text}"
+      scraped_players << {:name => name, :stats => stats}
+    end
+    puts scraped_players.uniq
   end
 end
+
+#list of players  =   table.css('tbody tr').select do |player|
+#puts player.css('span.fn').text
+
+    #stats = table.css('tbody tr').each do |players|
+      #puts "#{players.css('td').text} "
+    #end
