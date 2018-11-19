@@ -6,14 +6,19 @@ class GOATCLI::CLI
   @@team = []
 
   def call
-    puts "list of players"
+    GOATCLI::Scraper.new
+    scraped_players = GOATCLI::Scraper.scrape_players
+    GOATCLI::Player
 
-    puts "Enter the first player you would you like to compare?"
+    puts GOATCLI::Scraper.list_of_players
+
+    puts "Enter the first player you would like to compare?"
     input = gets.strip
-    puts "list players again"
+    puts GOATCLI::Player.find_by_name(input)
+    puts GOATCLI::Scraper.list_of_players
     puts "Enter the second player you would like to compare?"
     input2 = gets.strip
-    puts "#{input}, #{input2}"
+    puts GOATCLI::Player.find_by_name(input2)
 
     puts "Do you want to continue comparing, or add player?"
     input = gets.strip
