@@ -12,11 +12,12 @@ class GOATCLI::Scraper
     table = index_page.css('.wikitable.sortable')[1]
     players = table.css('tbody tr').each do |player|
       name = player.css('span.fn').text
-      stats = "#{player.css('td').text}"
-      position = "#{player.css('td')[2]}"
+      stats = player.css('td').text
+      position = player.css('td')[2].text if player.css('td')[2]
+
       scraped_players << {:name => name, :position => position, :stats => stats}
     end
-    puts scraped_players.uniq
+    scraped_players.uniq
   end
 
   def self.list_of_players
