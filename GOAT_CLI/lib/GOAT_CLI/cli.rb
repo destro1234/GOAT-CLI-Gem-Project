@@ -6,14 +6,16 @@ class GOATCLI::CLI
   @@team = []
 
   def call
+
     scraped_players = GOATCLI::Scraper.scrape_players
+    scraped_players.shift
     scraped_players.each do |player|
     GOATCLI::Player.new(player)
   end
-    binding.pry
+    puts "\n"
     puts GOATCLI::Scraper.list_of_players
-
-    puts "Enter the first player you would like to compare?"
+    puts "\n"
+    puts "Enter the 1- 50, the first player you would like to compare?"
     input = gets.strip
     puts GOATCLI::Player.find_by_name(input)
     puts GOATCLI::Scraper.list_of_players

@@ -6,5 +6,7 @@ require './lib/GOAT_CLI'
 
 
 puts "The Dream Team was the greatest team of NBA superstars ever formed. Here you can compare players and create your own Dream Team starting 5."
+
 GOATCLI::CLI.new.call
+
 puts "This is your Dream Team!"

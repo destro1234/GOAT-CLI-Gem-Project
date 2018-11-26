@@ -1,6 +1,6 @@
 class GOATCLI::Player
 
-  attr_accessor :name, :position, :stats
+  attr_accessor :name, :position, :teams_played_for
 
   @@all = []
 
@@ -14,14 +14,8 @@ class GOATCLI::Player
     @@all << self
   end
 
-  def self.create_from_array(scraped_players)
-    scraped_players.each do |player|
-      self.new(player)
-    end
-  end
-
   def self.find_by_name(input)
-    @@all.detect {|p| p.name == input}
+    @@all.detect {|p| puts p.teams_played_for if p.name == input}
   end
 
 
