@@ -22,10 +22,21 @@ class GOATCLI::CLI
     puts "\n"
 
     find_by_name(input)
-    puts list_players
+
+    puts "\n"
+
+    list_of_players
+
+    puts "\n"
+
     puts "Enter the second player you would like to compare?"
     input2 = gets.strip
-    puts GOATCLI::Player.find_by_name(input2)
+
+    puts "\n"
+
+    find_by_name(input2)
+
+    puts "\n"
 
     puts "Do you want to continue comparing, or add player?"
     input = gets.strip

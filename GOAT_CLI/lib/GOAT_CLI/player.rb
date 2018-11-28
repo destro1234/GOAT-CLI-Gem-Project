@@ -1,6 +1,6 @@
 class GOATCLI::Player
 
-  attr_accessor :name, :position, :stats #:points, :teams_played_for
+  attr_accessor :name, :position, :points, :teams_played_for
 
   @@all = []
 
