@@ -7,18 +7,22 @@ class GOATCLI::CLI
 
   def call
 
-    scraped_players = GOATCLI::Scraper.scrape_players
-    scraped_players.shift
-    scraped_players.each do |player|
+    @scraped_players = GOATCLI::Scraper.scrape_players
+    @scraped_players.shift
+    player_objects = @scraped_players.each do |player|
     GOATCLI::Player.new(player)
   end
+
     puts "\n"
-    puts GOATCLI::Scraper.list_of_players
+    list_of_players
     puts "\n"
     puts "Enter the 1- 50, the first player you would like to compare?"
+
     input = gets.strip
-    puts GOATCLI::Player.find_by_name(input)
-    puts GOATCLI::Scraper.list_of_players
+    puts "\n"
+
+    find_by_name(input)
+    puts list_players
     puts "Enter the second player you would like to compare?"
     input2 = gets.strip
     puts GOATCLI::Player.find_by_name(input2)
@@ -42,6 +46,16 @@ class GOATCLI::CLI
     #@team = GOATCLI::DreamTeam
 
 
+  end
+
+  def list_of_players
+    GOATCLI::Player.all.each_with_index do |player, index|
+      puts "#{index+1}. #{player.name}"
+    end
+  end
+
+  def find_by_name(input)
+    @scraped_players.detect {|p| puts p if p[:name] == input}
   end
 
   def add_to_team(input)
