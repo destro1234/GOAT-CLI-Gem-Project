@@ -18,7 +18,7 @@ class GOATCLI::Scraper
       rebounds = player.css('td')[4].text if player.css('td')[4]
       teams_played_for = player.css('td')[1].text.chomp if player.css('td')[1]
 
-      scraped_players << {:name => name, :position => position, :points => points, :teams_played_for => teams_played_for}
+      scraped_players << {:name => name, :position => position, :points => points, :rebounds => rebounds, :teams_played_for => teams_played_for}
     end
     scraped_players.uniq
   end

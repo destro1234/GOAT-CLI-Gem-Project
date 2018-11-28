@@ -1,6 +1,6 @@
 class GOATCLI::Player
 
-  attr_accessor :name, :position, :points, :teams_played_for
+  attr_accessor :name, :position, :points, :rebounds, :teams_played_for
 
   @@all = []
 
@@ -9,6 +9,10 @@ class GOATCLI::Player
       self.send("#{key}=", value)
     end
     @@all << self
+  end
+
+  def to_s
+      puts "#{self.name} - Position: #{self.position} - Career Points: #{self.points} - Career Rebounds: #{self.rebounds}"
   end
 
   def self.all
