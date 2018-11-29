@@ -13,12 +13,15 @@ class GOATCLI::Scraper
     players = table.css('tbody tr').each do |player|
 
       name = player.css('span.fn').text
+      teams_played_for = player.css('td')[1].text.chomp if player.css('td')[1]
       position = player.css('td')[2].text.chomp if player.css('td')[2]
       points = player.css('td')[3].text.chomp if player.css('td')[3]
       rebounds = player.css('td')[4].text if player.css('td')[4]
-      teams_played_for = player.css('td')[1].text.chomp if player.css('td')[1]
+      assists = player.css('td')[5].text if player.css('td')[5]
+      championships_won = player.css('td')[6].text if player.css('td')[6]
+      all_star_nominations = player.css('td')[9].text if player.css('td')[9]
 
-      scraped_players << {:name => name, :position => position, :points => points, :rebounds => rebounds, :teams_played_for => teams_played_for}
+      scraped_players << {:name => name, :teams_played_for => teams_played_for, :position => position, :points => points, :rebounds => rebounds, :assists => assists, :championships_won => championships_won, :all_star_nominations => all_star_nominations}
     end
     scraped_players.uniq
   end

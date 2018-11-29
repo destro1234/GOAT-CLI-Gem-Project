@@ -5,9 +5,11 @@ class GOATCLI::CLI
 
   @@team = []
 
-  def call
+  def initialize
+      make_players
+  end
 
-    make_players
+  def call
 
     puts "\n"
     list_of_players
@@ -25,35 +27,25 @@ class GOATCLI::CLI
 
     puts "\n"
     find_by_name(input).to_s
+    puts "\n"
     find_by_name(input2).to_s
 
     puts "\n"
 
-    puts "Do you want to continue comparing, or add player?"
-    input3 = gets.strip
+  compare
 
-    if input3 =="continue comparing"
+    until @@team.length == 5
       call
-    elsif input3 == "add player"
-      puts "Which player would you like to add to your team?"
-      player = gets.strip
-      add_to_team(find_by_name(player).to_s)
+
     end
-
-    #until @@team.length == 5
-      #call
-
-    #end
     #@players = GOATCLI::Player.all
     #@team = GOATCLI::DreamTeam
-
-
   end
 
   def make_players
-    @scraped_players = GOATCLI::Scraper.scrape_players
-    @scraped_players.shift
-    player_objects = @scraped_players.each do |player|
+    scraped_players = GOATCLI::Scraper.scrape_players
+    scraped_players.shift
+    scraped_players.each do |player|
     GOATCLI::Player.new(player)
   end
 end
@@ -62,8 +54,8 @@ end
       puts "50 Greatest Basketball Players of All Time"
       puts "\n"
 
-    GOATCLI::Player.all.each do |player, index|
-      puts "#{player.name}"
+    GOATCLI::Player.all.each_with_index do |player, index|
+      puts "#{index+1}. #{player.name}"
     end
   end
 
@@ -74,5 +66,18 @@ end
   def add_to_team(input)
     @@team << input
     puts @@team
+  end
+
+  def compare
+    puts "Do you want to continue comparing, or add player?"
+    input3 = gets.strip
+
+    if input3 == "continue comparing"
+      call
+    elsif input3 == "add player"
+      puts "Which player would you like to add to your team?"
+      player = gets.strip
+      add_to_team(find_by_name(player).name)
+    end
   end
 end
