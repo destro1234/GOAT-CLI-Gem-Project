@@ -1,15 +1,22 @@
 class GOATCLI::DreamTeam
-  attr_accessor :point_guard, :shooting_guard, :small_forward, :power_forward, :center
+  attr_accessor :pg, :sg, :sf, :pf, :c
 
   @@all = ()
 
 
-  def initialize()
-
+  def initialize(team_hash)
+    team_hash.each do |key, value|
+      self.send("#{key}=", value)
+    end
   end
 
   def self.all
     @@all
+  end
+
+  def self.to_s
+   puts  "#{self.pg} - #{self.sg} - #{self.sf} - #{self.pf} - #{self.c}"
+
   end
 
 end

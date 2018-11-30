@@ -42,7 +42,8 @@ class GOATCLI::CLI
 
     end
     #@players = GOATCLI::Player.all
-    @team #= GOATCLI::DreamTeam
+    dreamteam = GOATCLI::DreamTeam.new(@team)
+    puts dreamteam.to_s
   end
 
   def make_players
