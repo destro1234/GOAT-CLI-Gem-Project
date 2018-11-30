@@ -3,10 +3,11 @@ require 'pry'
 class GOATCLI::CLI
 
 
-  @@team = []
+
 
   def initialize
       make_players
+      @team = {:pg => "", :sg => "", :sf => "", :pf => "", :c => ""}
   end
 
   def call
@@ -34,16 +35,18 @@ class GOATCLI::CLI
 
   compare
 
-    until @@team.length == 5
+  puts "Are you done creating your dream team?"
+  input3 = gets.strip
+    until input3 = "Yes"
       call
 
     end
     #@players = GOATCLI::Player.all
-    #@team = GOATCLI::DreamTeam
+    @team #= GOATCLI::DreamTeam
   end
 
   def make_players
-    scraped_players = GOATCLI::Scraper.scrape_players
+    scraped_players = GOATCLI::Scraper.new.scrape_players
     scraped_players.shift
     scraped_players.each do |player|
     GOATCLI::Player.new(player)
@@ -63,21 +66,24 @@ end
     GOATCLI::Player.all.find {|p| p if p.name == input}
   end
 
-  def add_to_team(input)
-    @@team << input
-    puts @@team
+  def add_to_team(position)
+    puts "Which player would you like to add to your team?"
+    player = gets.strip
+    @team[:"#{position}"] = find_by_name(player).name
+    puts @team
   end
 
   def compare
     puts "Do you want to continue comparing, or add player?"
-    input3 = gets.strip
+    input = gets.strip
 
-    if input3 == "continue comparing"
+    if input == "continue comparing"
       call
-    elsif input3 == "add player"
-      puts "Which player would you like to add to your team?"
-      player = gets.strip
-      add_to_team(find_by_name(player).name)
+    elsif input == "add player"
+      puts "Which position would you like to add to your team pg, sg, sf, pf or c?"
+      position = gets.strip
+
+      add_to_team(position)
     end
   end
 end

@@ -6,7 +6,7 @@ class GOATCLI::Scraper
 
   @@list_of_players = []
 
-  def self.scrape_players
+  def scrape_players
     scraped_players = []
     index_page = Nokogiri::HTML(open('https://en.wikipedia.org/wiki/50_Greatest_Players_in_NBA_History'))
     table = index_page.css('.wikitable.sortable')[1]
