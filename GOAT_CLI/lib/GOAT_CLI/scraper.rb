@@ -10,7 +10,7 @@ class GOATCLI::Scraper
     scraped_players = []
     index_page = Nokogiri::HTML(open('https://en.wikipedia.org/wiki/50_Greatest_Players_in_NBA_History'))
     table = index_page.css('.wikitable.sortable')[1]
-    players = table.css('tbody tr').each do |player|
+    players = table.css('tbody tr').each_with_index do |player, index|
 
       name = player.css('span.fn').text
       teams_played_for = player.css('td')[1].text.chomp if player.css('td')[1]
@@ -21,7 +21,7 @@ class GOATCLI::Scraper
       championships_won = player.css('td')[6].text if player.css('td')[6]
       all_star_nominations = player.css('td')[9].text if player.css('td')[9]
 
-      scraped_players << {:name => name, :teams_played_for => teams_played_for, :position => position, :points => points, :rebounds => rebounds, :assists => assists, :championships_won => championships_won, :all_star_nominations => all_star_nominations}
+      scraped_players << {:index => index, :name => name, :teams_played_for => teams_played_for, :position => position, :points => points, :rebounds => rebounds, :assists => assists, :championships_won => championships_won, :all_star_nominations => all_star_nominations}
     end
     scraped_players.uniq
   end

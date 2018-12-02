@@ -14,9 +14,8 @@ class GOATCLI::DreamTeam
     @@all
   end
 
-  def self.to_s
-   puts  "#{self.pg} - #{self.sg} - #{self.sf} - #{self.pf} - #{self.c}"
-
-  end
+  def to_s
+   puts  "\n - Point Guard: #{self.pg}\n - Shooting Guard: #{self.sg}\n - Small Forward: #{self.sf}\n - Power Forward: #{self.pf}\n - Center: #{self.c}"
+ end
 
 end
