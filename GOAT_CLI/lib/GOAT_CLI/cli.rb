@@ -12,29 +12,29 @@ class GOATCLI::CLI
 
     GOATCLI::Player.list_of_players
 
-    puts "\nEnter the first player you would like to compare?"
-    input = gets.strip
+    puts "\nEnter 1-50, the first player you would like to compare?"
+    first_player = gets.strip
 
     GOATCLI::Player.list_of_players
 
-    puts "\nEnter the second player you would like to compare?"
-    input2 = gets.strip
+    puts "\nEnter 1-50, second player you would like to compare?"
+    second_player = gets.strip
 
     puts "\n"
-    GOATCLI::Player.find_by_name(input).to_s
+     GOATCLI::Player.find(first_player).to_s  #|| GOATCLI::Player.find_by_name(first_player).to_s
     puts "\n"
-    GOATCLI::Player.find_by_name(input2).to_s
+     GOATCLI::Player.find(second_player).to_s   #|| GOATCLI::Player.find_by_name(second_player).to_s
     puts "\n"
     compare
 
-    puts "Are you done creating your dream team?"
-  input3 = gets.strip
-    if input3 != "Yes"
+    puts "Are you done creating your dream team?(yes/no)"
+    input = gets.strip
+    if input.downcase != "yes"
       call
     end
     #@players = GOATCLI::Player.all
     @dreamteam = GOATCLI::DreamTeam.new(GOATCLI::Player.team)
-    puts "This is your Dream Team!"
+    puts "\nThis is your Dream Team!"
     @dreamteam.to_s
   end
 
@@ -47,7 +47,7 @@ class GOATCLI::CLI
 end
 
   def compare
-    puts "Do you want to continue comparing, add player?"
+    puts "Do you want to continue comparing or add player?"
     input = gets.strip
 
     if input == "continue comparing"
@@ -56,6 +56,9 @@ end
       puts "Which position would you like to add to your team pg, sg, sf, pf or c?"
       position = gets.strip
       GOATCLI::Player.add_to_team(position)
+      @dreamteam.to_s
+    else
+      compare
     end
 
   end
